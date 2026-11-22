@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubre clásicos y encuentra libros digitales de lectura gratuita.">
+  <title>FreeLibrary | Libros gratis</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'home/css/styles.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap top">
+      <a class="brand" href="{% url 'home' %}"><span class="mark" aria-hidden="true"></span>FreeLibrary</a>
+      <!-- Ajusta estas rutas a las vistas de tu proyecto Django. -->
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="{% url 'home' %}" aria-current="page">Inicio</a>
+        <a href="{% url 'home' %}">Catálogo</a>
+        <a href="#proyecto">El proyecto</a>
+      </nav>
+      <nav class="account-nav" aria-label="Mi cuenta">
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+        <a class="register-link" href="{% url 'register' %}">Registrarse</a>
+        <a class="profile-link" href="{% url 'home' %}" aria-label="Mi perfil">
+          <!-- Sustituye el avatar por un elemento img si el usuario tiene foto. -->
+          <span class="avatar-placeholder" aria-hidden="true"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main id="contenido">
+    <section class="wrap hero" id="inicio">
+      <div class="intro">
+        <p class="eyebrow">Biblioteca digital gratuita</p>
+        <h1>Historias para <em>todos.</em></h1>
+        <p>Descubre clásicos de la literatura, encuentra tu próxima lectura y empieza a leer gratis.</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="{% static 'home/images/biblioteca.jpg' %}" alt="Estanterias con Libros" width="1300" height="762" fetchpriority="high">
+      </figure>
+    </section>
+
+    <section class="collection" id="catalogo">
+      <div class="wrap">
+        <p class="eyebrow">Selección de clásicos</p>
+        <h2 class="section-head">Lecturas destacadas</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="cover quijote" aria-hidden="true"><span>Don Quijote<br>de la Mancha</span></div>
+            <div class="card-body">
+              <p class="eyebrow">Novela · Español</p>
+              <h3>Don Quijote de la Mancha</h3>
+              <p>Miguel de Cervantes</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cover alicia" aria-hidden="true"><span>Alice’s Adventures<br>in Wonderland</span></div>
+            <div class="card-body">
+              <p class="eyebrow">Fantasía · Inglés</p>
+              <h3>Alicia en el país de las maravillas</h3>
+              <p>Lewis Carroll</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cover dorian" aria-hidden="true"><span>The Picture of<br>Dorian Gray</span></div>
+            <div class="card-body">
+              <p class="eyebrow">Novela gótica · Inglés</p>
+              <h3>El retrato de Dorian Gray</h3>
+              <p>Oscar Wilde</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap about" id="proyecto">
+      <img src="{% static 'home/images/lectura.jpg' %}" alt="Libros apilados" width="1000" height="667" loading="lazy">
+      <div>
+        <p class="eyebrow">El proyecto</p>
+        <h2>Una librería que puedes hacer tuya.</h2>
+        <p>FreeLibrary es un espacio para descubrir libros de lectura gratuita. El código de esta página está disponible bajo la licencia MIT para que puedas cambiar el diseño y armar tu propio catálogo.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <span class="brand"><span class="mark" aria-hidden="true"></span>FreeLibrary</span>
+        <p>Biblioteca digital gratuita dedicada a los clásicos de la literatura.</p>
+      </div>
+      <div>
+        <h2>Proyecto</h2>
+        <p>Desarrollado con Django. Código de la portada bajo licencia MIT.</p>
+      </div>
+      <div>
+        <h2>Creador y soporte</h2>
+        <p>Briám Fernando Leyva Arévalo</p>
+        <!-- Sustituye esta dirección de ejemplo antes de publicar y añade un enlace mailto si lo necesitas. -->
+        <p>Correo de soporte: <span class="support-email">lawlietbriam@gmail.com</span> <small>(FreeLibrary)</small></p>
+      </div>
+    </div>
+    <div class="wrap footer-meta">
+      <small>Fotografías de Unsplash</small>
+    </div>
+  </footer>
+</body>
+</html>

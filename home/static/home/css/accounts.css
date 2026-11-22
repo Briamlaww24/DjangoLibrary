@@ -1,0 +1,170 @@
+:root {
+  --verde: #263f32;
+  --marfil: #f8f5ed;
+  --dorado: #f2cd78;
+  --texto-suave: #dce5d8;
+  --serif: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--marfil);
+  font: 1rem/1.5 system-ui, sans-serif;
+}
+
+.cuenta {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+
+.panel-formulario {
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 6vw, 5rem);
+  background: var(--verde);
+  color: var(--marfil);
+}
+
+.contenido {
+  width: min(100%, 25rem);
+}
+
+.marca {
+  display: inline-block;
+  margin-bottom: 2.25rem;
+  color: var(--dorado);
+  font: bold 1.3rem var(--serif);
+  text-decoration: none;
+}
+
+h1 {
+  margin: 0;
+  font: 400 clamp(2.5rem, 5vw, 4.25rem)/1 var(--serif);
+  letter-spacing: -.04em;
+}
+
+.intro {
+  margin: .85rem 0 1.75rem;
+  color: var(--texto-suave);
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+.campo {
+  display: grid;
+  gap: .35rem;
+}
+
+label {
+  font-size: .93rem;
+  font-weight: 650;
+}
+
+input,
+button {
+  width: 100%;
+  min-height: 3.1rem;
+  border: 1px solid transparent;
+  border-radius: .5rem;
+  font: inherit;
+}
+
+input {
+  padding: .7rem .85rem;
+  background: var(--marfil);
+  color: #202c24;
+}
+
+button {
+  margin-top: .35rem;
+  padding: .7rem 1rem;
+  background: var(--dorado);
+  color: #253326;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffdc93;
+}
+
+:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 4px;
+}
+
+.errorlist {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #ffd4c8;
+  font-size: .9rem;
+}
+
+.alternativa {
+  margin: 1.2rem 0 0;
+  color: var(--texto-suave);
+}
+
+.alternativa a {
+  color: var(--dorado);
+  text-underline-offset: .2em;
+}
+
+.panel-visual {
+  display: grid;
+  align-items: end;
+  position: relative;
+  isolation: isolate;
+  min-height: 26rem;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  overflow: hidden;
+  background: #3f493c;
+  color: white;
+}
+
+.panel-visual img,
+.panel-visual::after {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-visual img {
+  z-index: -2;
+  object-fit: cover;
+}
+
+.cuenta--registro .panel-visual img {
+  object-position: 55% center;
+}
+
+.panel-visual::after {
+  z-index: -1;
+  content: "";
+  background: linear-gradient(0deg, rgb(15 24 18 / 90%), transparent 75%);
+}
+
+.panel-visual p {
+  max-width: 13ch;
+  margin: 0;
+  font: 400 clamp(2.25rem, 5vw, 4rem)/1.05 var(--serif);
+}
+
+@media (max-width: 760px) {
+  .cuenta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel-visual {
+    min-height: 18rem;
+  }
+}

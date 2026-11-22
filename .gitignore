@@ -1,4 +1,10 @@
-.env
-.venv/
-.venv/*
-db.sqlite3
+**/.env
+**/.env.*
+!.env.example
+**/.venv/
+**/venv/
+**/db.sqlite3
+**/__pycache__/
+**/migrations/
+**/build/
+**/dist/

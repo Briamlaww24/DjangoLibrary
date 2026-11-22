@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro | FreeLibrary</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/accounts.css' %}">
+</head>
+<body>
+  <main class="cuenta cuenta--registro">
+    <section class="panel-formulario" aria-labelledby="titulo-registro">
+      <div class="contenido">
+        <a class="marca" href="/">FreeLibrary</a>
+
+        <h1 id="titulo-registro">Crea tu cuenta</h1>
+        <p class="intro">Da el primer paso hacia tu próxima lectura.</p>
+
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
+          <div class="campo">
+            <label for="id_username">Nombre de usuario</label>
+            {{ form.username.errors }}
+            <input id="id_username" name="username" type="text"
+                   autocomplete="username" value="{{ form.username.value|default_if_none:'' }}"
+                   required>
+          </div>
+
+          <div class="campo">
+            <label for="id_password1">Contraseña</label>
+            {{ form.password1.errors }}
+            <input id="id_password1" name="password1" type="password"
+                   autocomplete="new-password" required>
+          </div>
+
+          <div class="campo">
+            <label for="id_password2">Confirma tu contraseña</label>
+            {{ form.password2.errors }}
+            <input id="id_password2" name="password2" type="password"
+                   autocomplete="new-password" required>
+          </div>
+
+          <button type="submit">Crear cuenta</button>
+        </form>
+
+        <p class="alternativa">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+      </div>
+    </section>
+
+    <aside class="panel-visual">
+      <img src="{% static 'home/images/lectura.jpg' %}" alt="">
+      <p>Historias para todos.</p>
+    </aside>
+  </main>
+</body>
+</html>
