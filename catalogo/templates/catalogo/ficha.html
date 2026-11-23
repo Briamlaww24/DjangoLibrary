@@ -1,0 +1,24 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+{% block title %}{{ libro.titulo }}{% endblock %}
+{% block content %}
+  <a class="enlace regreso" href="{% url 'catalogo:lista' %}">← Volver al catálogo</a>
+  <article class="ficha">
+    {% static 'catalogo/portadas/' as portadas %}
+    <img class="portada" src="{{ portadas }}{{ libro.slug }}.jpg" alt="Portada de {{ libro.titulo }}" width="540" height="720">
+    <div>
+      <p class="categoria">{{ libro.genero }}</p>
+      <h1>{{ libro.titulo }}</h1>
+      {% if libro.calificacion %}
+        <p class="valoracion"><span aria-hidden="true">★</span> {{ libro.calificacion }} de 5 <small>· Calificación de ejemplo</small></p>
+      {% else %}
+        <p class="valoracion">Sin calificaciones</p>
+      {% endif %}
+      <h2>Descripción</h2>
+      <p>{{ libro.descripcion }}</p>
+      <h2>Vista previa</h2>
+      <blockquote>{{ libro.extracto }}</blockquote>
+      <a class="boton" href="{% url 'catalogo:leer' libro.slug %}">Leer PDF</a>
+    </div>
+  </article>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+{% block estado_catalogo %} aria-current="page"{% endblock %}
+{% block content %}
+  <header class="introduccion">
+    <p class="categoria">Biblioteca digital</p>
+    <h1>Catálogo</h1>
+    <p>Explora la colección y descubre tu próxima lectura.</p>
+  </header>
+  <div class="rejilla">
+    {% for libro in libros %}
+      <article class="tarjeta">
+        <a href="{% url 'catalogo:ficha' libro.slug %}">
+          {% static 'catalogo/portadas/' as portadas %}
+          <img src="{{ portadas }}{{ libro.slug }}.jpg" alt="" width="540" height="720" loading="lazy">
+          <div class="tarjeta-texto">
+            <p class="categoria">{{ libro.genero }}</p>
+            <h2>{{ libro.titulo }}</h2>
+            <p>{{ libro.extracto }}</p>
+            <span class="enlace">Ver ficha <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+    {% empty %}
+      <p>Aún no hay libros disponibles.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
