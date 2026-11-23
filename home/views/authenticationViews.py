@@ -1,7 +1,8 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+
+from home.forms.registerForm import RegisterForm
 
 class FreeLibraryLoginView(LoginView):
     template_name = 'home/authentication/login.html'
@@ -13,6 +14,5 @@ class FreeLibraryLogoutView(LogoutView):
 
 class FreeLibraryRegisterView(CreateView):
     template_name = 'home/authentication/register.html'
-    form_class = UserCreationForm
+    form_class = RegisterForm
     success_url = reverse_lazy('login')
-    

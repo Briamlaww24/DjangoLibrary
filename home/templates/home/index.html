@@ -21,9 +21,17 @@
       <nav class="account-nav" aria-label="Mi cuenta">
         <a href="{% url 'login' %}">Iniciar sesión</a>
         <a class="register-link" href="{% url 'register' %}">Registrarse</a>
-        <a class="profile-link" href="{% url 'home' %}" aria-label="Mi perfil">
+        <a class="profile-link" href="{% url 'profile' %}" aria-label="Mi perfil">
           <!-- Sustituye el avatar por un elemento img si el usuario tiene foto. -->
+           {% if avatar_url %}
+          <img class="avatar" src="{{ avatar_url }}" alt="Foto de perfil">
+          {% elif user.first_name %}
+          <span class="avatar inicial" aria-hidden="true">
+            {{ user.get_username|first|upper }}
+          </span>
+          {% else %}
           <span class="avatar-placeholder" aria-hidden="true"></span>
+          {% endif %}
         </a>
       </nav>
     </div>

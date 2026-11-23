@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi perfil | FreeLibrary</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/profile.css' %}">
+</head>
+<body class="perfil">
+  <header class="barra">
+    <div class="contenedor barra-interior">
+      <a class="marca" href="{% url 'home' %}">FreeLibrary</a>
+
+      <nav aria-label="Navegación principal">
+        <a href="{% url 'home' %}">Inicio</a>
+        <a href="/catalogo/">Catálogo</a>
+        <a href="{% url 'profile' %}" aria-current="page">Mi perfil</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor contenido">
+    <h1>Mi perfil</h1>
+
+    <div class="columnas">
+      <aside class="tarjeta resumen" aria-label="Resumen de la cuenta">
+        {% if avatar_url %}
+          <img class="avatar" src="{{ avatar_url }}" alt="Foto de perfil">
+        {% else %}
+          <span class="avatar inicial" aria-hidden="true">
+            {{ user.get_username|first|upper }}
+          </span>
+        {% endif %}
+
+        <h2>{{ user.get_full_name|default:user.get_username }}</h2>
+        <p>@{{ user.get_username }}</p>
+        <p>{{ user.email|default:"Correo sin registrar" }}</p>
+
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="boton salir" type="submit">Cerrar sesión</button>
+        </form>
+      </aside>
+
+      <section class="tarjeta ajustes" aria-labelledby="titulo-ajustes">
+        <h2 id="titulo-ajustes">Editar información</h2>
+
+        {% if messages %}
+          <ul class="mensajes" role="status">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <form class="formulario" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {{ hidden_field.errors }}
+          {% endfor %}
+
+          {% for field in form.visible_fields %}
+            <div class="campo">
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.help_text %}
+                <div class="ayuda" id="{{ field.auto_id }}_helptext">
+                  {{ field.help_text }}
+                </div>
+              {% endif %}
+              {{ field.errors }}
+            </div>
+          {% endfor %}
+
+          <button class="boton guardar" type="submit">Guardar cambios</button>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
