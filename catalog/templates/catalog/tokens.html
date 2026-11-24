@@ -5,7 +5,7 @@
   <a class="enlace regreso" href="{% url 'catalog:list' %}">← Volver al catálogo</a>
   <article class="ficha">
     {% static 'catalog/covers/' as covers %}
-    <img class="portada" src="{{ covers }}{{ libro.slug }}.jpg" alt="Portada de {{ libro.title }}" width="540" height="720">
+    <img class="portada" src="{% if libro.cover %}{{ libro.cover.url }}{% else %}{{ covers }}{{ libro.slug }}.jpg{% endif %}" alt="Portada de {{ libro.title }}" width="540" height="720">
     <div>
       <p class="categoria">{{ libro.genre }}</p>
       <h1>{{ libro.title }}</h1>

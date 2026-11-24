@@ -1,0 +1,37 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Subir un libro{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'catalog/css/createBook.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="subir-libro">
+    <a class="enlace regreso" href="{% url 'catalog:list' %}">← Volver al catálogo</a>
+    <header class="introduccion">
+      <h1>Subir un libro</h1>
+      <p>Completa los datos del libro y adjunta su portada y archivo PDF.</p>
+    </header>
+
+    <form class="formulario-libro" method="post" action="{% url 'catalog:create' %}"
+          enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="campos-libro">
+        {% for field in form.visible_fields %}
+          <div class="campo-libro{% if field.name == 'description' or field.name == 'extract' %} campo-libro-ancho{% endif %}">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+              <p class="ayuda-campo" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</p>
+            {% endif %}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+      </div>
+
+      <button class="boton" type="submit">Publicar libro</button>
+    </form>
+  </section>
+{% endblock %}

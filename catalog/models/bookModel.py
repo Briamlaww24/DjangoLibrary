@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import FileExtensionValidator
 class Book(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
@@ -7,6 +7,8 @@ class Book(models.Model):
     description = models.TextField()
     extract = models.TextField()
     rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True,)
+    pdf = models.FileField(upload_to="catalog/pdf/", null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    cover = models.ImageField(upload_to="catalog/covers/", null=True, blank=True)
 
     def __str__(self):
         return self.title

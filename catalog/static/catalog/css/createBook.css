@@ -1,0 +1,79 @@
+.subir-libro {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.subir-libro .introduccion p,
+.formulario-libro .ayuda-campo {
+  color: var(--suave);
+}
+
+.formulario-libro {
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid var(--borde);
+  border-radius: .75rem;
+  background: #fffdf7;
+}
+
+.campos-libro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.campo-libro {
+  display: grid;
+  align-content: start;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.campo-libro-ancho {
+  grid-column: 1 / -1;
+}
+
+.campo-libro label {
+  font-weight: 700;
+}
+
+.campo-libro input,
+.campo-libro textarea {
+  width: 100%;
+  padding: .65rem .75rem;
+  border: 1px solid #858d7e;
+  border-radius: .4rem;
+  background: white;
+  color: var(--tinta);
+  font: inherit;
+}
+
+.campo-libro textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.campo-libro :focus-visible,
+.formulario-libro button:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 3px;
+}
+
+.formulario-libro .errorlist {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  color: #8c2d23;
+}
+
+.formulario-libro .boton {
+  margin-top: 1.5rem;
+  border: 0;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .campos-libro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
