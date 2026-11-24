@@ -14,7 +14,7 @@
 
       <nav aria-label="Navegación principal">
         <a href="{% url 'home' %}">Inicio</a>
-        <a href="/catalogo/">Catálogo</a>
+        <a href="{% url 'catalog:list' %}">Catálogo</a>
         <a href="{% url 'profile' %}" aria-current="page">Mi perfil</a>
       </nav>
     </div>
