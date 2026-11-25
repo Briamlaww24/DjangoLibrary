@@ -7,5 +7,6 @@
 /media/
 **/__pycache__/
 **/migrations/
+!/catalog/migrations/
 **/build/
 **/dist/

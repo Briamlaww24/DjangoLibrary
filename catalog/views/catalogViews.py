@@ -16,7 +16,11 @@ def list(request):
 
 @login_required
 def token(request, slug):
-    return render(request, "catalog/tokens.html", {"libro": searchBook(slug)})
+    libro = searchBook(slug)
+    return render(request, "catalog/tokens.html", {
+        "libro": libro,
+        "puede_gestionar": request.user.is_superuser or libro.owner_id == request.user.pk,
+    })
 
 
 @login_required

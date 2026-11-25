@@ -1,7 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% load static %}
 
-{% block title %}Subir un libro{% endblock %}
+{% block title %}{% if book %}Editar libro{% else %}Subir un libro{% endif %}{% endblock %}
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'catalog/css/createBook.css' %}">
 {% endblock %}
@@ -10,11 +10,17 @@
   <section class="subir-libro">
     <a class="enlace regreso" href="{% url 'catalog:list' %}">← Volver al catálogo</a>
     <header class="introduccion">
-      <h1>Subir un libro</h1>
-      <p>Completa los datos del libro y adjunta su portada y archivo PDF.</p>
+      {% if book %}
+        <h1>Editar libro</h1>
+        <p>{{ book.title }}</p>
+      {% else %}
+        <h1>Subir un libro</h1>
+        <p>Completa los datos del libro y adjunta su portada y archivo PDF.</p>
+      {% endif %}
     </header>
 
-    <form class="formulario-libro" method="post" action="{% url 'catalog:create' %}"
+    <form class="formulario-libro" method="post"
+          action="{% if book %}{% url 'catalog:edit' book.slug %}{% else %}{% url 'catalog:create' %}{% endif %}"
           enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.non_field_errors }}
@@ -31,7 +37,7 @@
         {% endfor %}
       </div>
 
-      <button class="boton" type="submit">Publicar libro</button>
+      <button class="boton" type="submit">{% if book %}Guardar cambios{% else %}Publicar libro{% endif %}</button>
     </form>
   </section>
 {% endblock %}

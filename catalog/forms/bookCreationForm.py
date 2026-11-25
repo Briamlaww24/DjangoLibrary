@@ -14,6 +14,15 @@ class BookCreationForm(forms.ModelForm):
         label="Portada",
     )
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk is not None:
+            self.fields["slug"].disabled = True
+            for name in ("pdf", "cover"):
+                self.fields[name].required = False
+                self.fields[name].widget = forms.FileInput()
+                self.fields[name].help_text = "Deja este campo vacío para conservar el archivo actual."
+
     class Meta:
         model = Book
         fields = ["title", "slug", "genre", "description", "extract", "rating", "pdf", "cover"]

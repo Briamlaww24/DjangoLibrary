@@ -8,7 +8,9 @@ def createBook(request):
     if request.method == 'POST':
         form = BookCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            book = form.save()
+            book = form.save(commit=False)
+            book.owner = request.user
+            book.save()
             return redirect('catalog:token', slug=book.slug)
     else:
         form = BookCreationForm()

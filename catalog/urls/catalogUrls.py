@@ -9,4 +9,6 @@ urlpatterns = [
     path("", include("catalog.urls.createBookUrl")),
     path("<slug:slug>/", token, name="token"),
     path("<slug:slug>/read/", read, name="read"),
+    path("", include("catalog.urls.editBookUrl")),
+    path("", include("catalog.urls.deleteBookUrl")),
 ]

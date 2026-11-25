@@ -1,6 +1,14 @@
+from django.conf import settings
 from django.db import models
 from django.core.validators import FileExtensionValidator
 class Book(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="uploaded_books",
+    )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     genre = models.CharField(max_length=100)
