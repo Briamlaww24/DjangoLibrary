@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Categorías{% endblock %}
+{% block content %}
+  <header class="introduccion">
+    <h1>Categorías</h1>
+    {% if perms.catalog.add_category %}
+      <a class="boton" href="{% url 'catalog:category_create' %}">Crear categoría</a>
+    {% endif %}
+  </header>
+  <div class="rejilla">
+    {% for category in categories %}
+      <article class="tarjeta">
+        <a href="{{ category.get_absolute_url }}">
+          <div class="tarjeta-texto"><h2>{{ category.name }}</h2><p>{{ category.description }}</p></div>
+        </a>
+      </article>
+    {% empty %}
+      <p>Aún no hay categorías.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

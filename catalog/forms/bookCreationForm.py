@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import FileExtensionValidator
 
-from catalog.models.bookModel import Book
+from catalog.models import Book
 
 class BookCreationForm(forms.ModelForm):
     pdf = forms.FileField(
@@ -25,7 +25,11 @@ class BookCreationForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ["title", "slug", "genre", "description", "extract", "rating", "pdf", "cover"]
+        fields = ["title", "slug", "genre", "description", "extract", "rating", "category", "authors", "pdf", "cover"]
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 5}),
+            "extract": forms.Textarea(attrs={"rows": 4}),
+        }
         labels = {
             "title": "Título",
             "slug": "Slug",

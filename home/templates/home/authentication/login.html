@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Iniciar sesión | FreeLibrary</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/site.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/accounts.css' %}">
 </head>
 <body>
   <main class="cuenta cuenta--login">
     <section class="panel-formulario" aria-labelledby="titulo-login">
       <div class="contenido">
-        <a class="marca" href="{% url 'home' %}">FreeLibrary</a>
+        <a class="brand marca" href="{% url 'home' %}"><span class="mark" aria-hidden="true"></span>FreeLibrary</a>
 
         <h1 id="titulo-login">Inicia sesión</h1>
         <p class="intro">Vuelve a tu biblioteca y sigue descubriendo clásicos.</p>

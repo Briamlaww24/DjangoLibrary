@@ -1,0 +1,49 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block title %}{{ libro.title }}{% endblock %}
+{% block content %}
+  <a class="enlace regreso" href="{% url 'catalog:list' %}">← Volver al catálogo</a>
+  <article class="ficha">
+    {% static 'catalog/covers/' as covers %}
+    <img class="portada" src="{% if libro.cover %}{{ libro.cover.url }}{% else %}{{ covers }}{{ libro.slug }}.jpg{% endif %}" alt="Portada de {{ libro.title }}" width="540" height="720">
+    <div>
+      <p class="categoria">{{ libro.genre }}</p>
+      <h1>{{ libro.title }}</h1>
+      {% if libro.rating != None %}
+        <p class="valoracion"><span aria-hidden="true">★</span> {{ libro.rating }} de 5</p>
+      {% else %}
+        <p class="valoracion">Sin calificaciones</p>
+      {% endif %}
+      {% if libro.category and perms.catalog.view_category %}
+        <p>Categoría: <a href="{{ libro.category.get_absolute_url }}">{{ libro.category }}</a></p>
+      {% endif %}
+      {% if perms.catalog.view_author %}
+        {% for author in libro.authors.all %}
+          {% if forloop.first %}<p>Autores: {% endif %}
+          <a href="{{ author.get_absolute_url }}">{{ author }}</a>{% if forloop.last %}</p>{% else %}, {% endif %}
+        {% endfor %}
+      {% endif %}
+      <h2>Descripción</h2>
+      <p>{{ libro.description }}</p>
+      <h2>Vista previa</h2>
+      <blockquote>{{ libro.extract }}</blockquote>
+      <a class="boton" href="{% url 'catalog:read' libro.slug %}">Leer PDF</a>
+      {% if puedeGestionar and perms.catalog.change_book %}
+        <a class="enlace" href="{% url 'catalog:edit' libro.slug %}">Editar libro</a>
+      {% endif %}
+      {% if puedeGestionar and perms.catalog.delete_book %}
+        <a class="enlace" href="{% url 'catalog:delete' libro.slug %}">Borrar libro</a>
+      {% endif %}
+      {% if perms.catalog.view_loan %}
+        <h2>Préstamos registrados</h2>
+        <ul>
+          {% for loan in libro.loans.all %}
+            <li><a href="{{ loan.get_absolute_url }}">{{ loan.borrower }} · {{ loan.get_status_display }}</a></li>
+          {% empty %}
+            <li>Sin préstamos registrados.</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </article>
+{% endblock %}

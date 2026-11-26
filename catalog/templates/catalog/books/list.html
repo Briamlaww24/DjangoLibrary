@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block content %}
+  <header class="introduccion">
+    <p class="categoria">Biblioteca digital</p>
+    <h1>Catálogo</h1>
+    <p>Explora la colección y descubre tu próxima lectura.</p>
+    {% if perms.catalog.add_book %}
+      <a class="boton" href="{% url 'catalog:create' %}">Subir un libro</a>
+    {% endif %}
+  </header>
+  <div class="rejilla">
+    {% for libro in libros %}
+      <article class="tarjeta">
+        <a href="{% url 'catalog:token' libro.slug %}">
+          {% static 'catalog/covers/' as covers %}
+          <img src="{% if libro.cover %}{{ libro.cover.url }}{% else %}{{ covers }}{{ libro.slug }}.jpg{% endif %}" alt="" width="540" height="720" loading="lazy">
+          <div class="tarjeta-texto">
+            <p class="categoria">{{ libro.genre }}</p>
+            <h2>{{ libro.title }}</h2>
+            <p>{{ libro.extract }}</p>
+            <span class="enlace">Ver ficha <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+    {% empty %}
+      <p>Aún no hay libros disponibles.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

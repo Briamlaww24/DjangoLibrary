@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block title %}{{ author.name }}{% endblock %}
+{% block content %}
+  <a class="enlace regreso" href="{% url 'catalog:author_list' %}">← Volver a autores</a>
+  <header class="introduccion"><h1>{{ author.name }}</h1><p>{{ author.biography }}</p></header>
+  {% if perms.catalog.view_book %}
+    <h2>Libros del autor</h2>
+    <ul>
+      {% for book in author.books.all %}
+        <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+      {% empty %}
+        <li>Aún no hay libros asociados.</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

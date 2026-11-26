@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="wrap top">
+    <a class="brand" href="{% url 'home' %}"><span class="mark" aria-hidden="true"></span>FreeLibrary</a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="{% url 'home' %}"{% if section == 'home' %} aria-current="page"{% endif %}>Inicio</a>
+      {% if perms.catalog.view_book %}
+        <a href="{% url 'catalog:list' %}"{% if request.resolver_match.url_name == 'list' %} aria-current="page"{% endif %}>Catálogo</a>
+      {% endif %}
+      {% if perms.catalog.view_category %}
+        <a href="{% url 'catalog:category_list' %}"{% if request.resolver_match.url_name == 'category_list' %} aria-current="page"{% endif %}>Categorías</a>
+      {% endif %}
+      {% if perms.catalog.view_author %}
+        <a href="{% url 'catalog:author_list' %}"{% if request.resolver_match.url_name == 'author_list' %} aria-current="page"{% endif %}>Autores</a>
+      {% endif %}
+      {% if perms.catalog.view_loan %}
+        <a href="{% url 'catalog:loan_list' %}"{% if request.resolver_match.url_name == 'loan_list' %} aria-current="page"{% endif %}>Préstamos</a>
+      {% endif %}
+      {% if section == 'home' %}<a href="#proyecto">El proyecto</a>{% endif %}
+    </nav>
+    <nav class="account-nav" aria-label="Mi cuenta">
+      {% include 'home/shared/account_nav.html' %}
+    </nav>
+  </div>
+</header>

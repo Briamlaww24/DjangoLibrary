@@ -1,64 +1,8 @@
-.perfil {
-  --papel: #f8f5ed;
-  --verde: #304a39;
-  --verde-oscuro: #22392b;
-  --tinta: #23291f;
-  --suave: #555d51;
-  --borde: #d8dacd;
-  --serif: Georgia, "Times New Roman", serif;
-
-  margin: 0;
-  background: var(--papel);
-  color: var(--tinta);
-  font: 1rem/1.6 system-ui, sans-serif;
-}
-
-.perfil *,
-.perfil *::before,
-.perfil *::after {
-  box-sizing: border-box;
-}
-
-.perfil a {
-  color: var(--verde);
-  text-underline-offset: .25em;
-}
+.perfil { --verde-oscuro: #22392b; }
 
 .perfil :focus-visible {
   outline: 3px solid #9c482b;
   outline-offset: 4px;
-}
-
-.contenedor {
-  width: min(66rem, calc(100% - 2rem));
-  margin-inline: auto;
-}
-
-.barra {
-  border-bottom: 1px solid var(--borde);
-  background: #e9ecdf;
-}
-
-.barra-interior,
-.barra nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .75rem 1.25rem;
-}
-
-.barra-interior {
-  justify-content: space-between;
-  padding-block: 1rem;
-}
-
-.marca {
-  font: 700 1.45rem var(--serif);
-  text-decoration: none;
-}
-
-.barra [aria-current="page"] {
-  font-weight: 700;
 }
 
 .contenido {
@@ -79,9 +23,9 @@
 
 .tarjeta {
   padding: clamp(1.15rem, 4vw, 2rem);
-  border: 1px solid var(--borde);
+  border: 1px solid var(--line);
   border-radius: .75rem;
-  background: #fffdf7;
+  background: var(--surface);
 }
 
 .resumen {
@@ -102,7 +46,7 @@
   display: grid;
   place-items: center;
   background: #e0e8da;
-  color: var(--verde);
+  color: var(--green);
   font: 700 2.75rem var(--serif);
 }
 
@@ -113,11 +57,7 @@
 
 .resumen p {
   margin: .2rem 0;
-  color: var(--suave);
-}
-
-.resumen form {
-  margin-top: 1.25rem;
+  color: var(--muted);
 }
 
 .formulario {
@@ -144,7 +84,7 @@
   border: 1px solid #9ca797;
   border-radius: .4rem;
   background: white;
-  color: var(--tinta);
+  color: var(--ink);
   font: inherit;
 }
 
@@ -154,7 +94,7 @@
   font-size: .9rem;
 }
 
-.ayuda { color: var(--suave); }
+.ayuda { color: var(--muted); }
 .errorlist { margin: 0; color: #922f24; }
 
 .mensajes {
@@ -175,19 +115,11 @@
 
 .guardar {
   justify-self: start;
-  background: var(--verde);
+  background: var(--green);
   color: white;
 }
 
 .guardar:hover { background: var(--verde-oscuro); }
-
-.salir {
-  border-color: #922f24;
-  background: transparent;
-  color: #922f24;
-}
-
-.salir:hover { background: #f8eae5; }
 
 @media (max-width: 650px) {
   .columnas { grid-template-columns: 1fr; }

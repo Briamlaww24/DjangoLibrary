@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from catalog.classics import CLASSICS
+
 
 def home(request):
-    return render(request, 'home/index.html')
+    return render(request, "home/index.html", {"featuredBooks": CLASSICS[:3]})

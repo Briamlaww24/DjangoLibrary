@@ -5,22 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mi perfil | FreeLibrary</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/site.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/profile.css' %}">
 </head>
 <body class="perfil">
-  <header class="barra">
-    <div class="contenedor barra-interior">
-      <a class="marca" href="{% url 'home' %}">FreeLibrary</a>
+  {% include 'home/shared/siteHeader.html' with section='profile' %}
 
-      <nav aria-label="Navegación principal">
-        <a href="{% url 'home' %}">Inicio</a>
-        <a href="{% url 'catalog:list' %}">Catálogo</a>
-        <a href="{% url 'profile' %}" aria-current="page">Mi perfil</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="contenedor contenido">
+  <main class="wrap contenido">
     <h1>Mi perfil</h1>
 
     <div class="columnas">
@@ -37,10 +28,6 @@
         <p>@{{ user.get_username }}</p>
         <p>{{ user.email|default:"Correo sin registrar" }}</p>
 
-        <form method="post" action="{% url 'logout' %}">
-          {% csrf_token %}
-          <button class="boton salir" type="submit">Cerrar sesión</button>
-        </form>
       </aside>
 
       <section class="tarjeta ajustes" aria-labelledby="titulo-ajustes">
