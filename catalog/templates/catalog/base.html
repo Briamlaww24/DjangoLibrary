@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Catálogo{% endblock %} · FreeLibrary</title>
+  <link rel="stylesheet" href="{% static 'home/css/site.css' %}">
+  <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  {% include 'home/shared/siteHeader.html' with section='catalog' %}
+  <main class="wrap contenido">
+    {% if messages %}
+      <ul class="avisos" role="status">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="pie"><div class="wrap">FreeLibrary · Biblioteca digital</div></footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Autores{% endblock %}
+{% block content %}
+  <header class="introduccion"><h1>Autores</h1></header>
+  <div class="rejilla">
+    {% for author in authors %}
+      <article class="tarjeta">
+        <a href="{{ author.get_absolute_url }}">
+          <div class="tarjeta-texto"><h2>{{ author.name }}</h2><p>{{ author.biography }}</p></div>
+        </a>
+      </article>
+    {% empty %}
+      <p>Aún no hay autores.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

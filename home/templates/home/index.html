@@ -6,28 +6,11 @@
   <meta name="description" content="Descubre clásicos y encuentra libros digitales de lectura gratuita.">
   <title>FreeLibrary | Libros gratis</title>
   {% load static %}
+  <link rel="stylesheet" href="{% static 'home/css/site.css' %}">
   <link rel="stylesheet" href="{% static 'home/css/styles.css' %}">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap top">
-      <a class="brand" href="{% url 'home' %}"><span class="mark" aria-hidden="true"></span>FreeLibrary</a>
-      <!-- Ajusta estas rutas a las vistas de tu proyecto Django. -->
-      <nav class="main-nav" aria-label="Navegación principal">
-        <a href="{% url 'home' %}" aria-current="page">Inicio</a>
-        <a href="{% url 'home' %}">Catálogo</a>
-        <a href="#proyecto">El proyecto</a>
-      </nav>
-      <nav class="account-nav" aria-label="Mi cuenta">
-        <a href="{% url 'login' %}">Iniciar sesión</a>
-        <a class="register-link" href="{% url 'register' %}">Registrarse</a>
-        <a class="profile-link" href="{% url 'home' %}" aria-label="Mi perfil">
-          <!-- Sustituye el avatar por un elemento img si el usuario tiene foto. -->
-          <span class="avatar-placeholder" aria-hidden="true"></span>
-        </a>
-      </nav>
-    </div>
-  </header>
+  {% include 'home/shared/siteHeader.html' with section='home' %}
   <main id="contenido">
     <section class="wrap hero" id="inicio">
       <div class="intro">
@@ -45,30 +28,18 @@
         <p class="eyebrow">Selección de clásicos</p>
         <h2 class="section-head">Lecturas destacadas</h2>
         <div class="grid">
-          <article class="card">
-            <div class="cover quijote" aria-hidden="true"><span>Don Quijote<br>de la Mancha</span></div>
-            <div class="card-body">
-              <p class="eyebrow">Novela · Español</p>
-              <h3>Don Quijote de la Mancha</h3>
-              <p>Miguel de Cervantes</p>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover alicia" aria-hidden="true"><span>Alice’s Adventures<br>in Wonderland</span></div>
-            <div class="card-body">
-              <p class="eyebrow">Fantasía · Inglés</p>
-              <h3>Alicia en el país de las maravillas</h3>
-              <p>Lewis Carroll</p>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover dorian" aria-hidden="true"><span>The Picture of<br>Dorian Gray</span></div>
-            <div class="card-body">
-              <p class="eyebrow">Novela gótica · Inglés</p>
-              <h3>El retrato de Dorian Gray</h3>
-              <p>Oscar Wilde</p>
-            </div>
-          </article>
+          {% for book in featuredBooks %}
+            <article class="card">
+              <div class="cover">
+                <img src="{% static book.coverPath %}" alt="" loading="lazy" width="540" height="720">
+              </div>
+              <div class="card-body">
+                <p class="eyebrow">{{ book.genre }} · {{ book.language }}</p>
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.author }}</p>
+              </div>
+            </article>
+          {% endfor %}
         </div>
       </div>
     </section>

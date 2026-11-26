@@ -1,13 +1,8 @@
 :root {
   --verde: #263f32;
-  --marfil: #f8f5ed;
+  --marfil: var(--paper);
   --dorado: #f2cd78;
   --texto-suave: #dce5d8;
-  --serif: Georgia, "Times New Roman", serif;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 body {
@@ -35,7 +30,6 @@ body {
 }
 
 .marca {
-  display: inline-block;
   margin-bottom: 2.25rem;
   color: var(--dorado);
   font: bold 1.3rem var(--serif);

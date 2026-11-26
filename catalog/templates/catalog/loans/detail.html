@@ -1,0 +1,14 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Préstamo de {{ loan.book.title }}{% endblock %}
+{% block content %}
+  <a class="enlace regreso" href="{% url 'catalog:loan_list' %}">← Volver a préstamos</a>
+  <h1>Préstamo</h1>
+  <dl>
+    <dt>Libro</dt>
+    <dd>{% if perms.catalog.view_book %}<a href="{{ loan.book.get_absolute_url }}">{{ loan.book.title }}</a>{% else %}{{ loan.book.title }}{% endif %}</dd>
+    <dt>Lector</dt><dd>{{ loan.borrower }}</dd>
+    <dt>Fecha de préstamo</dt><dd>{{ loan.borrowed_on }}</dd>
+    <dt>Fecha de devolución</dt><dd>{{ loan.due_on }}</dd>
+    <dt>Estado</dt><dd>{{ loan.get_status_display }}</dd>
+  </dl>
+{% endblock %}

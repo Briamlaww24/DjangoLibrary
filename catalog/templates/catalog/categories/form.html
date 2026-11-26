@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block title %}{% if category %}Editar categoría{% else %}Crear categoría{% endif %}{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'catalog/css/createBook.css' %}">
+{% endblock %}
+{% block content %}
+  <section class="subir-libro">
+    <a class="enlace regreso" href="{% url 'catalog:category_list' %}">← Volver a categorías</a>
+    <header class="introduccion">
+      <h1>{% if category %}Editar categoría{% else %}Crear categoría{% endif %}</h1>
+    </header>
+    <form class="formulario-libro" method="post"
+          action="{% if category %}{% url 'catalog:category_edit' category.pk %}{% else %}{% url 'catalog:category_create' %}{% endif %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="campos-libro">
+        {% for field in form %}
+          <div class="campo-libro campo-libro-ancho">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+      </div>
+      <button class="boton" type="submit">Guardar categoría</button>
+    </form>
+  </section>
+{% endblock %}

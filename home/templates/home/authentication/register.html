@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registro | FreeLibrary</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/site.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/accounts.css' %}">
 </head>
 <body>
   <main class="cuenta cuenta--registro">
     <section class="panel-formulario" aria-labelledby="titulo-registro">
       <div class="contenido">
-        <a class="marca" href="/">FreeLibrary</a>
+        <a class="brand marca" href="{% url 'home' %}"><span class="mark" aria-hidden="true"></span>FreeLibrary</a>
 
         <h1 id="titulo-registro">Crea tu cuenta</h1>
         <p class="intro">Da el primer paso hacia tu próxima lectura.</p>
@@ -25,6 +26,30 @@
             {{ form.username.errors }}
             <input id="id_username" name="username" type="text"
                    autocomplete="username" value="{{ form.username.value|default_if_none:'' }}"
+                   required>
+          </div>
+
+          <div class="campo">
+            <label for="id_first_name">Nombre</label>
+            {{ form.first_name.errors }}
+            <input id="id_first_name" name="first_name" type="text"
+                   autocomplete="given-name" value="{{ form.first_name.value|default_if_none:'' }}"
+                   required>
+          </div>
+
+          <div class="campo">
+            <label for="id_last_name">Apellido</label>
+            {{ form.last_name.errors }}
+            <input id="id_last_name" name="last_name" type="text"
+                   autocomplete="family-name" value="{{ form.last_name.value|default_if_none:'' }}"
+                   required>
+          </div>
+
+          <div class="campo">
+            <label for="id_email">Correo electrónico</label>
+            {{ form.email.errors }}
+            <input id="id_email" name="email" type="email"
+                   autocomplete="email" value="{{ form.email.value|default_if_none:'' }}"
                    required>
           </div>
 

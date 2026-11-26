@@ -1,0 +1,19 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Préstamos{% endblock %}
+{% block content %}
+  <header class="introduccion"><h1>Préstamos</h1></header>
+  <div class="rejilla">
+    {% for loan in loans %}
+      <article class="tarjeta">
+        <a href="{{ loan.get_absolute_url }}">
+          <div class="tarjeta-texto">
+            <h2>{{ loan.book.title }}</h2>
+            <p>{{ loan.borrower }} · {{ loan.get_status_display }}</p>
+          </div>
+        </a>
+      </article>
+    {% empty %}
+      <p>Aún no hay préstamos.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

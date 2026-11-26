@@ -1,0 +1,60 @@
+:root {
+  color-scheme: light;
+  --paper: #f8f5ed;
+  --ink: #23291f;
+  --green: #304a39;
+  --muted: #555d51;
+  --sage: #e9ecdf;
+  --surface: #fffdf7;
+  --line: #d8dacd;
+  --serif: Georgia, "Times New Roman", serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 system-ui, sans-serif; }
+img { display: block; width: 100%; object-fit: cover; }
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3, .brand { font-family: var(--serif); line-height: 1.08; }
+.wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.site-header { border-bottom: 1px solid var(--line); }
+.top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.top { padding-block: 1.25rem; }
+.brand { display: inline-flex; align-items: center; gap: .55rem; font-size: 1.4rem; font-weight: bold; text-decoration: none; }
+.mark { width: 1.15rem; height: .9rem; border: 2px solid currentColor; border-radius: .2rem .2rem .1rem .1rem; background: linear-gradient(90deg, transparent 44%, currentColor 44% 56%, transparent 56%); }
+
+.main-nav, .account-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+}
+.site-header a { color: inherit; text-decoration: none; }
+.site-header :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.main-nav a, .account-nav a, .account-nav .salir-nav {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: .45rem .7rem;
+  border-radius: .4rem;
+  font-size: .875rem;
+  font-weight: 650;
+}
+.main-nav a:hover, .main-nav a[aria-current="page"], .account-nav a:hover, .account-nav .salir-nav:hover {
+  background: var(--sage);
+}
+.account-nav .register-link { background: var(--green); color: white; }
+.account-nav .register-link:hover { background: #213629; }
+@media (max-width: 570px) {
+  .top { gap: .65rem; }
+}
+
+.account-nav .salir-nav {
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 490px) {
+  .wrap { width: calc(100% - 2rem); }
+}

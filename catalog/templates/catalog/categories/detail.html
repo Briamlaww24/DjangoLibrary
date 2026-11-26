@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+  <a class="enlace regreso" href="{% url 'catalog:category_list' %}">← Volver a categorías</a>
+  <header class="introduccion">
+    <h1>{{ category.name }}</h1>
+    <p>{{ category.description }}</p>
+  </header>
+  {% if perms.catalog.change_category %}
+    <a class="boton" href="{% url 'catalog:category_edit' category.pk %}">Editar categoría</a>
+  {% endif %}
+  {% if perms.catalog.delete_category %}
+    <a class="enlace" href="{% url 'catalog:category_delete' category.pk %}">Borrar categoría</a>
+  {% endif %}
+  {% if perms.catalog.view_book %}
+    <h2>Libros de la categoría</h2>
+    <ul>
+      {% for book in category.books.all %}
+        <li><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+      {% empty %}
+        <li>Aún no hay libros en esta categoría.</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

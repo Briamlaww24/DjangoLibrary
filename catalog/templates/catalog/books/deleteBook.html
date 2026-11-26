@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Borrar libro{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'catalog/css/createBook.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="subir-libro">
+    <header class="introduccion">
+      <h1>Borrar libro</h1>
+      <p>¿Quieres eliminar «{{ book.title }}» del catálogo?</p>
+    </header>
+    <form class="formulario-libro" method="post" action="{% url 'catalog:delete' book.slug %}">
+      {% csrf_token %}
+      <button class="boton" type="submit">Confirmar borrado</button>
+      <a class="enlace" href="{% url 'catalog:token' book.slug %}">Cancelar</a>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block title %}Borrar categoría{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'catalog/css/createBook.css' %}">
+{% endblock %}
+{% block content %}
+  <section class="subir-libro">
+    <header class="introduccion">
+      <h1>Borrar categoría</h1>
+      <p>¿Quieres eliminar «{{ category.name }}»?</p>
+    </header>
+    <form class="formulario-libro" method="post" action="{% url 'catalog:category_delete' category.pk %}">
+      {% csrf_token %}
+      <button class="boton" type="submit">Confirmar borrado</button>
+      <a class="enlace" href="{{ category.get_absolute_url }}">Cancelar</a>
+    </form>
+  </section>
+{% endblock %}
